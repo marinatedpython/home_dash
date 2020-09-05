@@ -20,7 +20,6 @@ app = dash.Dash(__name__, meta_tags=[{'name': 'viewport', 'content': 'width=devi
 
 # Load data with Pandas
 df = pd.read_csv(DATA_PATH.joinpath('home.csv'))
-# Convert inception_date to datetime
 df['inception_date'] = df['inception_date'].apply(lambda x: dt.datetime.strptime(x, '%Y-%m-%d'))
 df['inception_year'] = df['inception_date'].dt.year
 df['inception_month'] = df['inception_date'].dt.month
@@ -126,7 +125,7 @@ app.layout = html.Div(
 							id='loss_ratio_months',
 							min=min(months),
 							max=max(months),
-							value=[min(months), min(months) + 12],
+							value=[min(months), min(months) + 11],
 							marks=months_dict,
 							className='dcc_control'
 						),
@@ -300,7 +299,7 @@ def update_sum_insured_text(summary_years):
 	]
 )
 def make_loss_ratio_graph(loss_ratio_years, loss_ratio_months):
-	loss_ratio_months = [i for i in range(loss_ratio_months[0], loss_ratio_months[-1])] # This is because the Dash slider seems to only return the first and last select month. For example Jan to Mar returns [1,3]
+	loss_ratio_months = [i for i in range(loss_ratio_months[0], loss_ratio_months[-1])] 
 	dff = df[df['inception_year'].isin(loss_ratio_years) &
 			 df['inception_month'].isin(loss_ratio_months)
 	]
