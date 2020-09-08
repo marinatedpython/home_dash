@@ -15,7 +15,6 @@ DATA_PATH = PATH.joinpath('data').resolve()
 
 # Declare app
 app = dash.Dash(__name__, meta_tags=[{'name': 'viewport', 'content': 'width=device-width'}])
-# server = app.server # check if this line is necessary
 
 
 # Load data with Pandas
